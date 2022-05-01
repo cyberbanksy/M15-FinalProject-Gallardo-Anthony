@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 public class IssResponseApi {
 
-    public static void main(String[] args) {
+    public static IssResponse issCheck() {
 
         WebClient client = WebClient.create("http://api.open-notify.org/iss-now.json?");
         IssResponse issResponse = null;
@@ -29,10 +29,6 @@ public class IssResponseApi {
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
-
-        if (issResponse != null) {
-            System.out.println(issResponse.iss_position.latitude);
-            System.out.println(issResponse.iss_position.longitude);
-        }
+        return issResponse;
     }
 }

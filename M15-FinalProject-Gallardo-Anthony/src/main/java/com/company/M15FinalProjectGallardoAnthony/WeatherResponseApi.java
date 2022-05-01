@@ -9,10 +9,10 @@ import reactor.core.publisher.Mono;
 @SpringBootApplication
 public class WeatherResponseApi {
 
-	public static void main(String[] args) {
+	public static WeatherResponse weatherCheck(String url) {
 		//SpringApplication.run(M15FinalProjectGallardoAnthonyApplication.class, args);
-
-		WebClient client = WebClient.create("https://api.openweathermap.org/data/2.5/weather?q=Irvine&appid=3953adf3d398184ad92cc5e29db4ca97&units=imperial");
+		//https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
+		WebClient client = WebClient.create(url);
 		WeatherResponse weatherResponse = null;
 		try {
 			Mono<WeatherResponse> response = client
@@ -35,10 +35,7 @@ public class WeatherResponseApi {
 		catch (Exception e) {
 			System.out.println("An error occurred: " + e.getMessage());
 		}
-
-		if (weatherResponse != null){
-			System.out.println(weatherResponse.main.temp);
-		}
+		return weatherResponse;
 	}
 }
 

@@ -10,10 +10,10 @@ import reactor.core.publisher.Mono;
     @SpringBootApplication
     public class CryptoResponseApi {
 
-        public static void main(String[] args) {
+        public static CryptoResponse cryptoCheck(String tickerIn) {
             //SpringApplication.run(M15FinalProjectGallardoAnthonyApplication.class, args);
 
-            WebClient client = WebClient.create("https://rest.coinapi.io/v1/assets/ETH?apikey=C3611BC9-3432-4DEB-B827-692780ADD2B3");
+            WebClient client = WebClient.create("https://rest.coinapi.io/v1/assets/"+tickerIn+"?apikey=C3611BC9-3432-4DEB-B827-692780ADD2B3");
             CryptoResponse cryptoResponse = null;
             try {
                 Mono <CryptoResponse[]> response = client
@@ -37,8 +37,6 @@ import reactor.core.publisher.Mono;
                 System.out.println("An error occurred: " + e.getMessage());
             }
 
-            if (cryptoResponse != null){
-                System.out.println(cryptoResponse.price_usd);
-            }
+            return cryptoResponse;
         }
     }
